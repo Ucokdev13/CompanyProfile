@@ -1,0 +1,1723 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Desa Pendidikan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #fff;
+    }
+
+    /* ================== HERO FULL SCREEN ================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;       /* penuh 1 layar */
+      width: 100%;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    /* BACKGROUND FOTO UTAMA (FO TO KAMPUS) */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url("assets/img/bg-kampus.png") center center / cover no-repeat;
+      filter: brightness(0.6);
+      z-index: 0;
+    }
+
+    /* LAYER MERAH DI ATAS FOTO */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(186, 23, 29, 0.95) 0%,
+        rgba(174, 26, 31, 0.75) 35%,
+        rgba(179, 18, 23, 0.25) 70%,
+        rgba(255, 255, 255, 1) 100%
+      );
+      z-index: 1;
+    }
+
+    /* ================== NAVBAR ================== */
+    .hero-nav {
+      position: relative;
+      z-index: 10;
+      background: #770000;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      box-shadow: 0 4px 10px rgba(0,0,0,.4);
+      width: 100%;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo-box {
+      width: 90px;
+      height: 52px;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-menu a {
+      color: #fff;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #ffe1a4;
+      transition: width .25s;
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    /* tombol bar (hamburger) – default disembunyikan, muncul di mobile */
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* ================== ISI HERO ================== */
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 40px 32px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* PILL PUTIH berisi 4 logo */
+    .hero-badge {
+      margin-top: 55px;
+      background: #ffffff;
+      border-radius: 999px;
+      padding: 12px 40px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;             /* jarak antar logo */
+    }
+
+    .hero-badge img {
+      height: 40px;          /* semua logo sama tinggi */
+      width: auto;
+      object-fit: contain;
+    }
+
+    .hero-title-wrapper {
+      position: relative;
+      margin-top: -90px;
+    }
+
+    .hero-title-main {
+      display: block;
+      max-width: 780px;
+      height: auto;
+      filter: drop-shadow(0 16px 24px rgba(0,0,0,.6));
+    }
+
+    .hero-plane-left,
+    .hero-plane-right {
+      position: absolute;
+      top: 16%;
+      width: 140px;
+      height: auto;
+    }
+
+    .hero-plane-left { left: -80px; }
+    .hero-plane-right { right: -80px; }
+
+    .hero-cta {
+      margin-top: 130px;
+      background: #f2c79a;
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 20px 80px;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(0,0,0,.35);
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(0,0,0,.4);
+    }
+
+    /* ---- CONTENT BOX (Penjelasan / Visi / Misi) ---- */
+
+    .info-box {
+      background: #D9D9D9;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 28px 30px 32px 32px;
+      border-radius: 18px;
+      position: relative;
+      color: #000;
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    /* garis tebal di sisi kiri */
+    .info-box::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 12px;
+      background: #BFBFBF;
+      border-radius: 8px;
+    }
+
+    /* judul */
+    .info-box h3 {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* subjudul VISI / MISI */
+    .info-box h4 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* paragraf */
+    .info-box p {
+      font-size: 20px;
+      color: #000;
+      margin-bottom: 12px;
+    }
+
+    /* list */
+    .info-box ol {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .info-box li {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    /* ---- DIVISI KAMPUS ---- */
+    .divisi-wrapper {
+      width: 100%;
+      margin: 50px 0 90px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* card tetap di kanan */
+    .divisi-right {
+      max-width: 750px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    /* WRAPPER PILL – bikin pill di tengah halaman */
+    .divisi-title-wrapper {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    /* pill-nya sendiri */
+    .divisi-title-pill {
+      display: inline-block;      /* boleh inline-block sekarang */
+      background: #E4C4A5;
+      padding: 12px 42px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+      letter-spacing: 1px;
+      margin: 0;                  /* nggak perlu auto lagi */
+      text-align: center;
+    }
+
+    /* ========= CARD UTAMA ========= */
+    .divisi-card {
+      background: #E4C4A5;
+      padding: 40px 50px;             /* lebih lega */
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      color: #000;
+      text-align: left;
+      max-width: 780px;               /* biar sama seperti gambar */
+      line-height: 1.45;              /* lebih rapat = lebih rapi */
+      font-size: 20px;                /* dinaikkan agar mirip desain */
+    }
+
+    /* JUDUL */
+    .divisi-card h3 {
+      font-size: 32px;                /* besar seperti desain */
+      font-weight: 900;
+      color: #A11212;
+      margin-bottom: 22px;
+    }
+
+    /* SUBJUDUL (Tupoksi, Proker) */
+    .divisi-card h4 {
+      font-size: 22px;                /* lebih besar */
+      font-weight: 800;
+      margin-top: 28px;               /* jarak pas */
+      margin-bottom: 10px;
+    }
+
+    /* PARAGRAF & LIST */
+    .divisi-card p,
+    .divisi-card li {
+      font-size: 20px;
+      font-weight: 500;               /* lebih tegas */
+      margin-bottom: 6px;
+    }
+
+    /* NOMOR LIST */
+    .divisi-card ol {
+      padding-left: 22px;             /* biar rapi */
+      margin-top: 4px;
+    }
+
+    /* LIST ITALIC */
+    .divisi-card li i {
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* ========= BOX STRUKTUR (SEJAJAR DENGAN CARD) ========= */
+    .org-box {
+      background: #F1F1F1;
+      width: 100%;               /* ⬅ ikut lebar card */
+      margin-top: 22px;          /* jarak dari card */
+      padding: 40px 30px 45px;
+      border-radius: 22px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+      text-align: center;
+      color: #000;
+    }
+
+    .org-box .level-1 {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .org-box .level-2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-top: 10px;
+    }
+
+    .org-box .level-3-container {
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+      margin-top: 22px;
+    }
+
+    .org-box .level-3 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    /* ============================
+       DIVISI MINAT & BAKAT (RIGHT)
+       ============================ */
+
+    .minat-wrapper {
+      width: 100%;
+      margin: 60px 0;            /* jarak antar section */
+      font-family: Arial, sans-serif;
+    }
+
+    .minat-right {
+      max-width: 750px;          /* lebar sesuai card lain */
+      margin-left: auto;         /* tarik ke kanan */
+      margin-right: 0;
+    }
+
+    /* CARD UTAMA */
+    .minat-card {
+      background: #E4C4A5;
+      padding: 40px 50px;
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      color: #000;
+      text-align: left;
+      line-height: 1.45;
+      font-size: 20px;
+    }
+
+    /* JUDUL */
+    .minat-card h3 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #A11212;
+      margin-bottom: 22px;
+    }
+
+    /* SUBTITLE */
+    .minat-card h4 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    /* TEKS & LIST */
+    .minat-card p,
+    .minat-card li {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .minat-card ol {
+      padding-left: 22px;
+      margin-top: 4px;
+    }
+
+    .minat-card li i {
+      font-style: italic;
+    }
+
+    /* ==============================
+       DIVISI SARANA & PRASARANA (LEFT)
+       ============================== */
+
+    .sarpras-wrapper {
+      width: 100%;
+      margin: 60px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .sarpras-left {
+      max-width: 750px;         /* lebar card */
+      margin-left: 0;           /* nempel kiri */
+      margin-right: auto;       /* dorong ke kiri */
+    }
+
+    .divisi-left {
+  max-width: 750px;
+  margin-left: 0;      /* nempel kiri */
+  margin-right: auto;  /* dorong ke kiri */
+}
+
+    /* CARD */
+    .sarpras-card {
+      background: #E4C4A5;
+      padding: 40px 50px;
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      color: #000;
+      text-align: left;
+      line-height: 1.45;
+      font-size: 20px;
+    }
+
+    /* JUDUL */
+    .sarpras-card h3 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #A11212;
+      margin-bottom: 22px;
+    }
+
+    /* SUBTITLES */
+    .sarpras-card h4 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    /* LIST & PARAGRAPH */
+    .sarpras-card p,
+    .sarpras-card li {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .sarpras-card ol {
+      padding-left: 22px;
+      margin-top: 4px;
+    }
+
+    .sarpras-card li i {
+      font-style: italic;
+    }
+
+    /* ==============================
+       DIVISI KEMITRAAN (RIGHT)
+       ============================== */
+
+    .kemitraan-wrapper {
+      width: 100%;
+      margin: 60px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .kemitraan-right {
+      max-width: 750px;          /* lebar konsisten */
+      margin-left: auto;         /* posisi kanan */
+      margin-right: 0;
+    }
+
+    /* CARD */
+    .kemitraan-card {
+      background: #E4C4A5;
+      padding: 40px 50px;
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      color: #000;
+      text-align: left;
+      line-height: 1.45;
+      font-size: 20px;
+    }
+
+    /* JUDUL */
+    .kemitraan-card h3 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #A11212;
+      margin-bottom: 22px;
+    }
+
+    /* SUBTITLE */
+    .kemitraan-card h4 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    /* TEKS & LIST */
+    .kemitraan-card p,
+    .kemitraan-card li {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .kemitraan-card ol {
+      padding-left: 22px;
+      margin-top: 4px;
+    }
+
+    .kemitraan-card li i {
+      font-style: italic;
+    }
+
+    /* ==============================
+       DIVISI KOMINFO (LEFT)
+       ============================== */
+
+    .kominfo-wrapper {
+      width: 100%;
+      margin: 60px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .kominfo-left {
+      max-width: 750px;          /* lebar card konsisten */
+      margin-left: 0;            /* pojok kiri */
+      margin-right: auto;
+    }
+
+    .kominfo-card {
+      background: #E4C4A5;
+      padding: 40px 50px;
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+      color: #000;
+      text-align: left;
+      line-height: 1.45;
+      font-size: 20px;
+    }
+
+    /* Judul */
+    .kominfo-card h3 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #A11212;
+      margin-bottom: 22px;
+    }
+
+    /* Subjudul */
+    .kominfo-card h4 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 26px;
+      margin-bottom: 10px;
+    }
+
+    /* Isi & List */
+    .kominfo-card p,
+    .kominfo-card li {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .kominfo-card ol {
+      padding-left: 22px;
+      margin-top: 4px;
+    }
+
+    .kominfo-card i {
+      font-style: italic;
+    }
+
+
+    /* ============================
+       OUR CONTENT – KEGIATAN PENGAJARAN
+       ============================ */
+
+    #our-content {
+      background: #ffffff;
+      padding: 70px 0 90px;
+    }
+
+    .oc-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    /* PILL JUDUL – ukuran pas, tidak melebar */
+    .oc-title-pill {
+      display: block;
+      background: #E4C4A5;
+      padding: 12px 40px;     /* kecilkan padding */
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 auto 10px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+      max-width: 260px;       /* ⬅ BATAS supaya tidak melebar */
+    }
+
+    /* PILL MERAH – ukuran pas */
+    .oc-subtitle-pill {
+      display: block;
+      background: #B31217;
+      padding: 12px 50px;     /* kecilkan padding */
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 auto 30px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+      max-width: 300px;       /* ⬅ BATAS juga */
+    }
+
+    /* KOLOM 2 KOTAK */
+    .oc-columns {
+      display: flex;
+      justify-content: center;
+      gap: 70px;
+      align-items: flex-start;
+    }
+
+    /* KOTAK LUAR – ABU LEBAR */
+    .oc-pillar {
+      background: #F2F2F2;
+      border-radius: 180px;
+      padding: 22px;
+      width: 680px;              /* 🔥 LEBAR BARU */
+    }
+
+    /* KOTAK DALAM – PUTIH */
+    .oc-pillar-inner {
+      background: #ffffff;
+      border-radius: 180px 180px 50px 50px;
+      padding: 32px 22px 26px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.20);
+      overflow: hidden;
+    }
+
+    /* LABEL MELENGKUNG */
+    .oc-arch-label {
+      margin-bottom: 14px;
+    }
+
+    .oc-arch-label svg {
+      width: 100%;
+      height: 80px;
+    }
+
+    .oc-arch-label text {
+      fill: #A11212;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* FOTO DI DALAM KOTAK */
+    .oc-photo-list img {
+      display: block;
+      width: 100%;
+      height: 190px;         /* 🔥 foto lebih besar */
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+
+    .oc-photo-list img:last-child {
+      margin-bottom: 0;
+    }
+
+  /* =========================
+   PROGRAM KERJA SECTION
+   ========================= */
+
+#program-kerja {
+  background: #fbe6d6;
+  border-radius: 150px 150px 0 0;
+  margin-top: 40px;
+}
+
+/* rapikan jarak bawah wrapper */
+.pk-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 0 40px;
+  background: #fbe6d6;
+  border-top-left-radius: 90px;
+  border-top-right-radius: 90px;
+}
+
+/* JARAK ANTAR ITEM */
+.pk-item {
+  margin: 24px 0 0;      /* item kedua turun dikit dari FESTA */
+}
+
+.pk-item:first-child {
+  margin-top: 0;         /* FESTA tetap normal */
+}
+
+.pk-item:last-child {
+  margin-bottom: 16px;   /* DIKLAT bagian bawah */
+}
+
+/* judul gambar (Festival / Diklat) */
+.pk-item-title img {
+  width: 540px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;        /* HAPUS jarak bawah */
+}
+
+/* 🔥 geser card DIKLAT naik supaya nempel gambar */
+.pk-item:last-child .pk-card {
+  margin-top: -110px;     /* kalau masih kejauhan, bisa dinaikkan ke -80/-90 */
+}
+
+/* card dasar */
+.pk-card {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 22px 26px;
+  border-radius: 22px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  text-align: justify;
+  font-size: 20px;
+  line-height: 1.6;
+  color: #333333;
+}
+
+/* gradient khusus FESTA (atas agak pink) */
+.pk-card-festa {
+  background: linear-gradient(
+    180deg,
+    #ffe9f3 0%,
+    #ffdbe9 45%,
+    #ffeef5 100%
+  );
+}
+
+/* gradient khusus DIKLAT (kuning-pink lembut) */
+.pk-card-diklat {
+  background: radial-gradient(circle at top,
+    #ffeebd 0%,
+    #ffe0c7 40%,
+    #ffd9de 80%
+  );
+}
+
+/* teks dalam card */
+.pk-card p {
+  margin: 0;
+}
+
+/* baris foto FESTA (3 foto) */
+.pk-photo-row {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pk-photo-row img {
+  width: 32%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+    /* =========================
+       COLLAB + CONTACT + FOOTER
+       ========================= */
+#collaboration-section {
+  padding: 100px 0 80px;
+
+  background-image:
+    linear-gradient(
+      to bottom,
+      #fbe6d6 0%,
+      #e8b3a2 25%,
+      #d87868 55%,
+      rgba(122, 0, 0, 0.40) 80%,  /* lebih transparan */
+      rgba(122, 0, 0, 0.70) 100%
+    ),
+    url("assets/img/bg-kampus.png");
+
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+
+    /* wrapper utama */
+    .collab-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      color: #fff; /* default teks di luar card putih */
+    }
+
+    /* pill title collaborations */
+    .collab-title-pill {
+      display: inline-block;
+      background: #e4c2a3;
+      padding: 14px 70px;
+      border-radius: 999px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+      margin-bottom: 40px;
+    }
+
+    /* card collab (glass) */
+    .collab-card {
+      background: rgba(255, 255, 255, 0.42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      padding: 40px 35px;
+      border-radius: 22px;
+
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.18),
+        0 4px 12px rgba(255, 255, 255, 0.6) inset;
+
+      text-align: left;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #333333; /* isi card tetap gelap biar kebaca */
+    }
+
+    .collab-card h3 {
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .collab-card ul {
+      margin: 0 0 20px 20px;
+      padding: 0;
+    }
+
+    .collab-card li {
+      margin-bottom: 6px;
+    }
+
+    /* ===== CONTACT & FOOTER ===== */
+
+    /* pill CONTACT US */
+    .cf-title-pill {
+      display: inline-block;
+      margin-top: 40px;
+      background: #e4c2a3;
+      padding: 16px 70px;
+      border-radius: 999px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* kotak IG + Email */
+    .cf-contact-card {
+      max-width: 900px;
+      margin: 18px auto 40px;
+      padding: 16px 24px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .cf-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cf-icon {
+      font-size: 28px;
+    }
+
+    /* footer menu */
+.cf-footer-menus {
+  margin-top: 10px;
+  color: #fff;
+  text-align: left;
+
+  /* 🔥 baru: bloknya dipusatkan & ada padding */
+  max-width: 700px;    /* lebar area menu */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+.cf-footer-menus h3 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* kolom menu */
+.cf-footer-cols {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+
+  /* 🔥 ikut lebar yang sama dengan judul */
+  max-width: 100%;
+}
+
+.cf-footer-cols ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 4px;      /* sedikit masuk biar nggak mepet */
+}
+
+.cf-footer-cols li {
+  margin-bottom: 6px;
+}
+
+
+    .cf-footer-cols a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    .cf-footer-cols a:hover {
+      text-decoration: underline;
+    }
+
+    /* copyright */
+    .cf-copy {
+      margin-top: 40px;
+      font-size: 18px;
+      line-height: 1.6;
+      text-align: center;
+      color: #fff;
+    }
+
+    /* ============================
+   RESPONSIVE
+   ============================ */
+
+@media (max-width: 992px) {
+  .hero-inner {
+    padding: 30px 16px 60px;
+  }
+
+  .hero-title-main {
+    max-width: 90vw;
+  }
+
+  .hero-badge {
+    flex-wrap: wrap;
+    padding: 10px 24px;
+    gap: 16px;
+  }
+
+  /* buang padding simetris, biar bisa nempel kiri/kanan */
+  .divisi-wrapper,
+  .minat-wrapper,
+  .sarpras-wrapper,
+  .kemitraan-wrapper,
+  .kominfo-wrapper {
+    padding: 0;
+  }
+
+  /* 🔥 yang di desktop kanan → tetap kanan, tapi kotak diperkecil */
+  .divisi-right,
+  .minat-right,
+  .kemitraan-right {
+    width: 88%;            /* kotak lebih kecil dari layar */
+    max-width: none;
+    margin-left: auto;     /* dorong ke kanan */
+    margin-right: 0;
+  }
+
+  /* 🔥 yang di desktop kiri → tetap kiri */
+  .divisi-left,
+  .sarpras-left,
+  .kominfo-left {
+    width: 88%;
+    max-width: none;
+    margin-left: 0;        /* nempel kiri */
+    margin-right: auto;
+  }
+
+  /* card diperkecil padding + font */
+  .divisi-card,
+  .minat-card,
+  .sarpras-card,
+  .kemitraan-card,
+  .kominfo-card {
+    padding: 20px 18px;
+    font-size: 17px;
+  }
+
+  .divisi-card h3,
+  .minat-card h3,
+  .sarpras-card h3,
+  .kemitraan-card h3,
+  .kominfo-card h3 {
+    font-size: 24px;
+  }
+
+  .divisi-card h4,
+  .minat-card h4,
+  .sarpras-card h4,
+  .kemitraan-card h4,
+  .kominfo-card h4 {
+    font-size: 18px;
+  }
+
+  .org-box {
+    padding: 24px 18px 28px;
+  }
+
+  .oc-wrapper {
+    padding: 0 16px;
+  }
+
+  .oc-columns {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .oc-pillar {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 40px;
+  }
+
+  .oc-pillar-inner {
+    border-radius: 40px 40px 24px 24px;
+  }
+
+  .pk-wrapper {
+    padding: 40px 16px 30px;
+  }
+
+  .pk-card {
+    padding: 20px 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-nav {
+    padding: 0 16px;
+  }
+
+  .nav-logo-box {
+    width: 72px;
+    height: 44px;
+  }
+
+  /* MENU MOBILE */
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: #770000;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 24px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+
+  .nav-menu.show {
+    display: flex;
+  }
+
+  .nav-menu a {
+    font-size: 16px;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .hero-badge img {
+    height: 32px;
+  }
+
+  .hero-cta {
+    margin-top: 130px;
+    width: 80%;
+    padding: 14px 20px;
+    font-size: 18px;
+  }
+
+  .org-box .level-3-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cf-contact-card {
+    padding: 14px 16px;
+    gap: 14px;
+    font-size: 18px;
+  }
+
+  .cf-footer-menus {
+    max-width: 100%;
+    margin: 24px auto 0;
+    padding: 0 24px 10px;
+  }
+
+  .cf-footer-cols {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cf-footer-cols a {
+    font-size: 18px;
+  }
+
+  #collaboration-section {
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(251, 230, 214, 0.85) 0%,
+        rgba(232, 179, 162, 0.80) 25%,
+        rgba(216, 120, 104, 0.75) 55%,
+        rgba(122, 0, 0, 0.65) 80%,
+        rgba(122, 0, 0, 0.80) 100%
+      ),
+      url("assets/img/bg-kampus.png");
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cta {
+    font-size: 16px;
+  }
+
+  .divisi-card,
+  .minat-card,
+  .sarpras-card,
+  .kemitraan-card,
+  .kominfo-card {
+    font-size: 15px;
+    padding: 18px 14px;
+  }
+
+  .divisi-card h3,
+  .minat-card h3,
+  .sarpras-card h3,
+  .kemitraan-card h3,
+  .kominfo-card h3 {
+    font-size: 21px;
+  }
+
+  .divisi-card h4,
+  .minat-card h4,
+  .sarpras-card h4,
+  .kemitraan-card h4,
+  .kominfo-card h4 {
+    font-size: 17px;
+  }
+
+  .info-box {
+    font-size: 16px;
+  }
+
+  .cf-title-pill {
+    padding: 12px 40px;
+    font-size: 22px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+<header class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+
+  <!-- NAVBAR -->
+  <div class="hero-nav">
+    <div class="nav-left">
+      <div class="nav-logo-box">
+        <!-- LOGO UTAMA -->
+        <img src="assets/img/logodesa.jpg" alt="Logo Desa Pendidikan">
+      </div>
+    </div>
+
+    <!-- tombol bar -->
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
+    <nav class="nav-menu">
+      <a href="#home">Home Page</a>
+      <a href="#intro">Introductions</a>
+      <a href="#divisi">Divisions</a>
+      <a href="#our-content">Our Content</a>
+      <a href="#collaboration-section">Collaborations</a>
+    </nav>
+  </div>
+
+  <!-- KONTEN HERO -->
+  <div class="hero-inner">
+    <!-- PILL PUTIH ISI 4 LOGO -->
+    <div class="hero-badge">
+      <img src="assets/img/logounj.png" alt="Logo 1">
+      <img src="assets/img/logobem.png" alt="Logo 2">
+      <img src="assets/img/logobem2.png" alt="Logo 3">
+      <img src="assets/img/logodesa.jpg" alt="Logo 4">
+    </div>
+
+    <div class="hero-title-wrapper">
+      <img class="hero-title-main" src="assets/img/artdesa.png" alt="Desa Pendidikan">
+    </div>
+
+    <button class="hero-cta">
+      APA ITU DESA PENDIDIKAN?
+    </button>
+  </div>
+</header>
+
+<section id="intro">
+  <div class="info-box">
+    <h3>PENJELASAN</h3>
+    <p>
+      Desa Pendidikan atau yang biasa disebut dengan DEPE adalah salah satu Underbow dari
+      Departemen Sosial dan Politik BEM FISH UNJ yang didirikan pada tahun 2012 dan berfokus
+      pada pengabdian sosial masyarakat di bidang pendidikan.
+    </p>
+    <p>
+      Desa Pendidikan merupakan perwujudan nyata dari Tri Dharma Perguruan Tinggi yaitu
+      pengabdian kepada masyarakat. Sejauh ini <i>track record</i> Desa Pendidikan berhasil
+      meningkatkan minat belajar, mencapai prestasi di luar prestasi akademik, melakukan
+      kegiatan positif, dan memberdayakan masyarakat.
+    </p>
+
+    <h4>VISI</h4>
+    <p>
+      Mewujudkan Desa Pendidikan sebagai wadah pengembangan bagi fungsionaris dan organisasi
+      yang menyulut terwujudnya pendidikan berkualitas sehingga masyarakat luas mendapatkan
+      kesetaraan dalam pendidikan dengan sistem pengajaran yang bermutu, kreatif, berkarakter,
+      berwawasan luas dan sumber daya pengajar yang kompeten.
+    </p>
+
+    <h4>MISI</h4>
+    <ol>
+      <li>Menjunjung tinggi asas kekeluargaan agar terciptanya internal harmonis yang berdampak pada kinerja.</li>
+      <li>Mengembangkan sistem pendidikan dan pengajaran yang inovatif, kreatif, dan bermutu.</li>
+      <li>Mencetak fungsionaris yang kompeten guna melahirkan kualitas pengajaran yang berkualitas.</li>
+      <li>Menjadi pilar harapan yang berdampak dan bermanfaat bagi masyarakat.</li>
+      <li>Melahirkan anak binaan yang berwawasan luas dan berkarakter.</li>
+      <li>Menjalin dan mengembangkan kerjasama dengan lembaga internal dan eksternal UNJ yang relevan.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="divisi">
+  <div class="divisi-wrapper">
+    <div class="divisi-title-wrapper">
+      <div class="divisi-title-pill">
+        DIVISI DESA PENDIDIKAN
+      </div>
+    </div>
+
+    <div class="divisi-right">
+      <div class="divisi-card">
+        <h3>Divisi BPHI</h3>
+
+        <h4>• Tupoksi</h4>
+        <p>
+          Mengawasi dan mengambil keputusan terkait seluruh kegiatan pengajaran dan program kerja
+          Desa Pendidikan. Sekretaris mengelola administrasi persuratan, sementara bendahara
+          bertanggung jawab atas penyimpanan dan pengelolaan keuangan, termasuk pembayaran kas dan
+          atribut fungsionaris.
+        </p>
+
+        <h4>• Agenda</h4>
+        <ol>
+          <li>ASPEN (Apresias e Setelah Pengajaran)</li>
+          <li><i>One Day with LA</i></li>
+          <li><i>Seven Days with LA</i></li>
+          <li><i>LA Deep Talk</i></li>
+          <li>LA Nomaden</li>
+          <li>Parade dan Expo Desa Pendidikan</li>
+        </ol>
+      </div>
+
+      <div class="org-box">
+        <div class="level-1">Kepala Sekolah</div>
+        <div class="level-2">Wakil Kepala Sekolah</div>
+
+        <div class="level-3-container">
+          <div class="level-3">Sekretaris</div>
+          <div class="level-3">Bendahara</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="divisi-kurikulum">
+  <div class="divisi-left">
+    <div class="divisi-card">
+      <h3>Divisi Kurikulum</h3>
+
+      <h4>• Tupoksi</h4>
+      <ol>
+        <li>Menjabarkan kalender pendidikan</li>
+        <li>Membuat dan menyusun agenda pembelajaran</li>
+        <li>Merancang konsep pembelajaran yang disesuaikan dengan agenda kegiatan kurikulum</li>
+        <li>Membuat Rencana Pelaksanaan Pembelajaran (RPP)</li>
+      </ol>
+
+      <h4>• Program Kerja (PROKER)</h4>
+      <ol>
+        <li>EDUTRIP</li>
+        <li>Lomba Cerdas Cermat Nusantara</li>
+        <li>Pendidikan <i>Manner</i></li>
+        <li>RPP+</li>
+        <li><i>Mentoring</i> Kurikulum (MK)</li>
+        <li>Penilaian Kemampuan (PK)</li>
+        <li>Tes Kemampuan Pengajar (TKP)</li>
+        <li>Silabus dan Sistem Kurikulum Desa Pendidikan</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="divisi-minat">
+  <div class="minat-wrapper">
+    <div class="minat-right">
+      <div class="minat-card">
+        <h3>Divisi Minat dan Bakat</h3>
+
+        <p>
+          Divisi Minat dan Bakat adalah divisi yang berfungsi untuk membantu mengembangkan dan 
+          memberikan wadah bagi minat dan bakat adik binaan khususnya di bidang non-akademik.
+        </p>
+
+        <h4>• Agenda</h4>
+        <ol>
+          <li><i>Fun Cooking</i></li>
+          <li>Lari pagi dan senam</li>
+          <li>Kerajinan tangan</li>
+          <li>Menggambar dan mewarnai</li>
+          <li>Eksperimen sains</li>
+          <li>LCC (<i>Collab with Kurikulum</i>)</li>
+        </ol>
+
+        <h4>• Proker</h4>
+        <ol>
+          <li>Festival Anak (FESTA)</li>
+          <li>Festival 17an (FESTLAS)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="divisi-sarpras">
+  <div class="sarpras-wrapper">
+    <div class="sarpras-left">
+      <div class="sarpras-card">
+        <h3>Divisi Sarana dan Prasarana</h3>
+
+        <h4>• Tupoksi</h4>
+        <ol>
+          <li>Membuat media pembelajaran.</li>
+          <li>Mengontrol dan mencatat perlengkapan sarana dan prasarana.</li>
+          <li>Menyediakan alat dan bahan yang dibutuhkan saat pekan pengajaran.</li>
+        </ol>
+
+        <h4>• Program Kerja (PROKER)</h4>
+        <ol>
+          <li>MEDPEM <i>Universe</i></li>
+          <li>SIDIK (Donasi Desa Pendidikan)</li>
+          <li>Sosialisasi</li>
+          <li>Data Inventaris</li>
+          <li>Snack Bulanan</li>
+          <li>Gemesan (Piket)</li>
+          <li>Sarpras <i>Time</i></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="divisi-kemitraan">
+  <div class="kemitraan-wrapper">
+    <div class="kemitraan-right">
+      <div class="kemitraan-card">
+        <h3>Divisi Kemitraan</h3>
+
+        <p>
+          Divisi Kemitraan bertugas untuk membangun dan menjaga hubungan internal antar fungsionaris.
+          Selain itu, kemitraan menjadi pintu utama untuk menjalin kerjasama eksternal yang strategis,
+          mutualisme, dan berkelanjutan.
+        </p>
+
+        <h4>• Agenda</h4>
+        <ol>
+          <li>Oprec <i>volunteer</i> dan fungsionaris</li>
+          <li><i>Welcoming party</i> dan bukber</li>
+          <li><i>Rolling</i> pengajaran</li>
+          <li>Diklat</li>
+          <li>Depe <i>Awards</i></li>
+          <li>Survey tengah periode</li>
+          <li>Kolaborasi eksternal</li>
+          <li><i>Door to Door</i></li>
+          <li><i>Workshop</i></li>
+          <li><i>Farewell Party</i></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="divisi-kominfo">
+  <div class="kominfo-wrapper">
+    <div class="kominfo-left">
+      <div class="kominfo-card">
+        <h3>Divisi Kominfo</h3>
+
+        <h4>• Tupoksi</h4>
+        <ol>
+          <li>
+            Melakukan dokumentasi setiap pengajaran seperti Live Report dan dokumentasi setiap
+            kegiatan Desa Pendidikan.
+          </li>
+          <li>
+            Melakukan publikasi seperti <i>Press Release</i>, Recap/OSC (<i>One Step Closer</i>),
+            LSPR/<i>Fun Corner</i>, <i>D-Days</i>, dan pembuatan <i>Company Profile</i>.
+          </li>
+          <li>
+            Mengelola media sosial Desa Pendidikan (@desapendidikan), YouTube, dan 
+            <i>Website</i>.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="our-content">
+  <div class="oc-wrapper">
+    <div class="oc-title-pill">OUR CONTENT</div>
+    <div class="oc-subtitle-pill">KEGIATAN PENGAJARAN</div>
+
+    <div class="oc-columns">
+      <div class="oc-pillar">
+        <div class="oc-pillar-inner">
+          <div class="oc-arch-label">
+            <svg viewBox="0 0 300 80">
+              <defs>
+                <path id="curve-kuri" d="M25,70 Q150,5 275,70" />
+              </defs>
+              <text>
+                <textPath href="#curve-kuri" startOffset="50%" text-anchor="middle">
+                  KURIKULUM
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          <div class="oc-photo-list">
+            <img src="assets/img/k1.jpg" alt="">
+            <img src="assets/img/k2.jpg" alt="">
+            <img src="assets/img/k3.jpg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="oc-pillar">
+        <div class="oc-pillar-inner">
+          <div class="oc-arch-label">
+            <svg viewBox="0 0 300 80">
+              <defs>
+                <path id="curve-min" d="M25,70 Q150,5 275,70" />
+              </defs>
+              <text>
+                <textPath href="#curve-min" startOffset="50%" text-anchor="middle">
+                  MINKAT
+                </textPath>
+              </text>
+            </svg>
+          </div>
+
+          <div class="oc-photo-list">
+            <img src="assets/img/m1.jpg" alt="">
+            <img src="assets/img/m2.jpg" alt="">
+            <img src="assets/img/m3.jpg" alt="">
+            <img src="assets/img/m4.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="program-kerja">
+  <div class="pk-wrapper">
+    <div class="pk-title-pill">PROGRAM KERJA</div>
+
+    <div class="pk-item">
+      <div class="pk-item-title">
+        <img src="assets/img/festival.png" alt="Festival Anak">
+      </div>
+
+      <div class="pk-card pk-card-festa">
+        <p>
+          <b>Festival anak</b> atau <b>FESTA</b> adalah salah satu program kerja dari Desa Pendidikan,
+          khususnya dari Divisi Minat dan Bakat yang diselenggarakan setiap bulan Juni. Dalam acara ini,
+          anak-anak binaan menunjukkan bakat mereka mulai dari Cerdas Cermat, Fashion Show, membaca puisi,
+          menggambar, menyanyi, mewarnai, serta diadakan workshop membuat kerajinan tangan.
+        </p>
+
+        <div class="pk-photo-row">
+          <img src="assets/img/f1.jpg" alt="Festival Anak 1">
+          <img src="assets/img/f2.jpg" alt="Festival Anak 2">
+          <img src="assets/img/f3.jpg" alt="Festival Anak 3">
+        </div>
+      </div>
+    </div>
+
+    <div class="pk-item">
+      <div class="pk-item-title">
+        <img src="assets/img/diklat.png" alt="Diklat">
+      </div>
+
+      <div class="pk-card pk-card-diklat">
+        <p>
+          <b>Diklat</b> adalah suatu kegiatan dimana calon fungsionaris mendapatkan pembekalan dasar untuk menjadi pengajar sekaligus fungsionaris Desa Pendidikan. Diklat juga merupakan salah satu program kerja dari Divisi Kemitraan. Kegiatan ini mengundang narasumber yang memiliki pengalaman dalam bidang pengabdian serta dalam bidang pendidikan atau pengajaran.
+        </p>
+
+        <div class="pk-photo-row">
+          <img src="assets/img/d1.jpg" alt="Diklat 1">
+          <img src="assets/img/d2.jpg" alt="Diklat 2">
+          <img src="assets/img/d3.jpg" alt="Diklat 3">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="collaboration-section">
+  <div class="collab-wrapper">
+    <div class="collab-title-pill">COLLABORATIONS</div>
+
+    <div class="collab-card">
+      <h3>Collab 2023</h3>
+      <ul>
+        <li>KMHB Care by Keluarga Mahasiswa Hindu Buddha</li>
+        <li>Turun Tangan Jakarta</li>
+        <li>Pengabdian Masyarakat oleh Mahasiswa Fakultas Hukum UPNVJ</li>
+        <li>Edutrip x Taman Anak Langit by BEMP Pendidikan Sejarah</li>
+        <li>One Day with Club K</li>
+      </ul>
+
+      <h3>Collab 2024</h3>
+      <ul>
+        <li>Generasi Gemilang Tanggap Bencana (GEMPITA) by Bemp Pendgeo</li>
+        <li>Geografi Aktif Melestarikan Alam (GEMALAM) by Bemp Geografi</li>
+        <li>Edutrip kolaborasi bersama HIMA Manajemen STIE</li>
+      </ul>
+
+      <h3>Collab 2025</h3>
+      <ul>
+        <li>Pekan Kolaborasi dengan Mahasiswa Fakultas Bahasa dan Seni (FBS)</li>
+        <li>Rumah Psikologi (Rumpsi) by Psychological Health Care UNJ</li>
+        <li>Sosiologi Berbagi Empati (SOBAT) by Bemp Pendidikan Sosiologi</li>
+        <li>Club K</li>
+        <li>(upcoming) STIK Sint Carolus</li>
+      </ul>
+    </div>
+
+    <div class="cf-title-pill">CONTACT US!</div>
+
+    <div class="cf-contact-card">
+      <div class="cf-contact-item">
+        <span class="cf-icon">📸</span>
+        Instagram: @desapendidikan
+      </div>
+      <div class="cf-contact-item">
+        <span class="cf-icon">✉️</span>
+        Email: desapendidikanunj@gmail.com
+      </div>
+    </div>
+
+    <div class="cf-footer-menus">
+      <h3>ABOUT WEBSITE</h3>
+
+      <div class="cf-footer-cols">
+        <ul>
+          <li><a href="#home">Home Page</a></li>
+          <li><a href="#intro">Introductions</a></li>
+          <li><a href="#divisi">Divisions</a></li>
+        </ul>
+
+        <ul>
+          <li><a href="#our-content">Our Content</a></li>
+          <li><a href="#collaboration-section">Collaborations</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cf-copy">
+      <p>©Kominfo Desa Pendidikan FISH UNJ</p>
+      <p>©Desa Pendidikan FISH UNJ 2025. All rights reserved.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Scroll halus ke section intro ketika tombol diklik
+  const heroCta = document.querySelector('.hero-cta');
+  if (heroCta) {
+    heroCta.addEventListener('click', () => {
+      const target = document.querySelector('#intro');
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // Toggle navbar (hamburger)
+  const navToggle = document.querySelector('.nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('show');
+    });
+
+    // Tutup menu setelah klik link
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('show');
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
