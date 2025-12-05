@@ -1026,14 +1026,18 @@
       text-align: center;
       color: #fff;
     }
-
-    /* ============================
+/* ============================
    RESPONSIVE
    ============================ */
 
 @media (max-width: 992px) {
+  /* hero jangan dipaksa 1 layar penuh */
+  .hero {
+    min-height: auto;
+  }
+
   .hero-inner {
-    padding: 30px 16px 60px;
+    padding: 30px 16px 24px; /* bawah dipendekin */
   }
 
   .hero-title-main {
@@ -1046,7 +1050,7 @@
     gap: 16px;
   }
 
-  /* buang padding simetris, biar bisa nempel kiri/kanan */
+  /* posisi kartu-kartu tetap seperti sebelumnya */
   .divisi-wrapper,
   .minat-wrapper,
   .sarpras-wrapper,
@@ -1055,27 +1059,24 @@
     padding: 0;
   }
 
-  /* 🔥 yang di desktop kanan → tetap kanan, tapi kotak diperkecil */
   .divisi-right,
   .minat-right,
   .kemitraan-right {
-    width: 88%;            /* kotak lebih kecil dari layar */
+    width: 88%;
     max-width: none;
-    margin-left: auto;     /* dorong ke kanan */
+    margin-left: auto;
     margin-right: 0;
   }
 
-  /* 🔥 yang di desktop kiri → tetap kiri */
   .divisi-left,
   .sarpras-left,
   .kominfo-left {
     width: 88%;
     max-width: none;
-    margin-left: 0;        /* nempel kiri */
+    margin-left: 0;
     margin-right: auto;
   }
 
-  /* card diperkecil padding + font */
   .divisi-card,
   .minat-card,
   .sarpras-card,
@@ -1144,6 +1145,25 @@
     height: 44px;
   }
 
+  /* logo & title sedikit naik */
+  .hero-title-wrapper {
+    margin-top: 10px;
+  }
+
+  .hero-title-main {
+    margin-top: 20px;
+  }
+
+  /* 🔥 tombol nempel ke bawah hero, dekat dengan PENJELASAN */
+  .hero-cta {
+    margin-top: 16px !important;   /* jangan 130px lagi */
+    margin-bottom: 0 !important;
+  }
+
+  .hero-inner {
+    padding-bottom: 8px !important;
+  }
+
   /* MENU MOBILE */
   .nav-menu {
     display: none;
@@ -1173,13 +1193,6 @@
 
   .hero-badge img {
     height: 32px;
-  }
-
-  .hero-cta {
-    margin-top: 130px;
-    width: 80%;
-    padding: 14px 20px;
-    font-size: 18px;
   }
 
   .org-box .level-3-container {
@@ -1228,6 +1241,8 @@
 @media (max-width: 480px) {
   .hero-cta {
     font-size: 16px;
+    margin-top: 14px !important;
+    margin-bottom: 0 !important;
   }
 
   .divisi-card,
@@ -1264,7 +1279,6 @@
     font-size: 22px;
   }
 }
-
 
   </style>
 </head>
@@ -1736,4 +1750,5 @@
 
 </body>
 </html>
+
 
