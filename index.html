@@ -10,1364 +10,1398 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 
-  <style>
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-     font-family: "Montserrat", sans-serif;
-      background: #ffffff;
-      color: #fff;
-    }
-
-    /* ================== HERO FULL SCREEN ================== */
-    .hero {
-      position: relative;
-      min-height: 100vh;       /* penuh 1 layar */
-      width: 100%;
-      overflow: hidden;
-      color: #fff;
-    }
-
-    /* BACKGROUND FOTO UTAMA (FO TO KAMPUS) */
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url("assets/img/bg-kampus.png") center center / cover no-repeat;
-      filter: brightness(0.6);
-      z-index: 0;
-    }
-
-    /* LAYER MERAH DI ATAS FOTO */
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom,
-        rgba(186, 23, 29, 0.95) 0%,
-        rgba(174, 26, 31, 0.75) 35%,
-        rgba(179, 18, 23, 0.25) 70%,
-        rgba(255, 255, 255, 1) 100%
-      );
-      z-index: 1;
-    }
-
-    /* ================== NAVBAR ================== */
-    .hero-nav {
-      position: relative;
-      z-index: 10;
-      background: #770000;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      box-shadow: 0 4px 10px rgba(0,0,0,.4);
-      width: 100%;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-logo-box {
-      width: 90px;
-      height: 52px;
-      background: #fff;
-      border-radius: 4px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .nav-logo-box img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 32px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .nav-menu a {
-      color: #fff;
-      text-decoration: none;
-      position: relative;
-      padding-bottom: 4px;
-    }
-
-    .nav-menu a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: #ffe1a4;
-      transition: width .25s;
-    }
-
-    .nav-menu a:hover::after {
-      width: 100%;
-    }
-
-    /* tombol bar (hamburger) – default disembunyikan, muncul di mobile */
-    .nav-toggle {
-      display: none;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    /* ================== ISI HERO ================== */
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      padding: 40px 32px 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* PILL PUTIH berisi 4 logo */
-    .hero-badge {
-      margin-top: 55px;
-      background: #ffffff;
-      border-radius: 999px;
-      padding: 12px 40px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.5);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;             /* jarak antar logo */
-    }
-
-    .hero-badge img {
-      height: 40px;          /* semua logo sama tinggi */
-      width: auto;
-      object-fit: contain;
-    }
-
-    .hero-title-wrapper {
-      position: relative;
-      margin-top: -90px;
-    }
-
-    .hero-title-main {
-      display: block;
-      max-width: 780px;
-      height: auto;
-      filter: drop-shadow(0 16px 24px rgba(0,0,0,.6));
-    }
-
-    .hero-plane-left,
-    .hero-plane-right {
-      position: absolute;
-      top: 16%;
-      width: 140px;
-      height: auto;
-    }
-
-    .hero-plane-left { left: -80px; }
-    .hero-plane-right { right: -80px; }
-
-    .hero-cta {
-      margin-top: 130px;
-      background: #f2c79a;
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 20px 80px;
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 14px 30px rgba(0,0,0,.35);
-    }
-    .hero-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 34px rgba(0,0,0,.4);
-    }
-
-    /* ---- CONTENT BOX (Penjelasan / Visi / Misi) ---- */
-
-    .info-box {
-      background: #D9D9D9;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 28px 30px 32px 32px;
-      border-radius: 18px;
-      position: relative;
-      color: #000;
-      line-height: 1.55;
-    }
-
-    /* garis tebal di sisi kiri */
-    .info-box::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 16px;
-      bottom: 16px;
-      width: 12px;
-      background: #BFBFBF;
-      border-radius: 8px;
-    }
-
-    /* judul */
-    .info-box h3 {
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    /* subjudul VISI / MISI */
-    .info-box h4 {
-      margin-top: 20px;
-      margin-bottom: 10px;
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    /* paragraf */
-    .info-box p {
-      font-size: 20px;
-      color: #000;
-      margin-bottom: 12px;
-    }
-
-    /* list */
-    .info-box ol {
-      padding-left: 20px;
-      margin-top: 8px;
-    }
-
-    .info-box li {
-      font-size: 20px;
-      margin-bottom: 6px;
-    }
-
-    /* ---- DIVISI KAMPUS ---- */
-    .divisi-wrapper {
-      width: 100%;
-      margin: 50px 0 90px;
-    }
-
-    /* card tetap di kanan */
-    .divisi-right {
-      max-width: 750px;
-      margin-left: auto;
-      margin-right: 0;
-    }
-
-    /* WRAPPER PILL – bikin pill di tengah halaman */
-    .divisi-title-wrapper {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    /* pill-nya sendiri */
-    .divisi-title-pill {
-      display: inline-block;      /* boleh inline-block sekarang */
-      background: #E4C4A5;
-      padding: 12px 42px;
-      border-radius: 999px;
-      font-size: 18px;
-      font-weight: 700;
-      color: #ffffff;
-      box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
-      letter-spacing: 1px;
-      margin: 0;                  /* nggak perlu auto lagi */
-      text-align: center;
-    }
-
-    /* ========= CARD UTAMA ========= */
-    .divisi-card {
-      background: #E4C4A5;
-      padding: 40px 50px;             /* lebih lega */
-      border-radius: 22px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
-      color: #000;
-      text-align: left;
-      max-width: 780px;               /* biar sama seperti gambar */
-      line-height: 1.45;              /* lebih rapat = lebih rapi */
-      font-size: 20px;                /* dinaikkan agar mirip desain */
-    }
-
-    /* JUDUL */
-    .divisi-card h3 {
-      font-size: 32px;                /* besar seperti desain */
-      font-weight: 900;
-      color: #A11212;
-      margin-bottom: 22px;
-    }
-
-    /* SUBJUDUL (Tupoksi, Proker) */
-    .divisi-card h4 {
-      font-size: 22px;                /* lebih besar */
-      font-weight: 800;
-      margin-top: 28px;               /* jarak pas */
-      margin-bottom: 10px;
-    }
-
-    /* PARAGRAF & LIST */
-    .divisi-card p,
-    .divisi-card li {
-      font-size: 20px;
-      font-weight: 500;               /* lebih tegas */
-      margin-bottom: 6px;
-    }
-
-    /* NOMOR LIST */
-    .divisi-card ol {
-      padding-left: 22px;             /* biar rapi */
-      margin-top: 4px;
-    }
-
-    /* LIST ITALIC */
-    .divisi-card li i {
-      font-style: italic;
-      font-weight: 500;
-    }
-
-    /* ========= BOX STRUKTUR (SEJAJAR DENGAN CARD) ========= */
-    .org-box {
-      background: #F1F1F1;
-      width: 100%;               /* ⬅ ikut lebar card */
-      margin-top: 22px;          /* jarak dari card */
-      padding: 40px 30px 45px;
-      border-radius: 22px;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-      text-align: center;
-      color: #000;
-    }
-
-    .org-box .level-1 {
-      font-size: 22px;
-      font-weight: 800;
-    }
-
-    .org-box .level-2 {
-      font-size: 20px;
-      font-weight: 800;
-      margin-top: 10px;
-    }
-
-    .org-box .level-3-container {
-      display: flex;
-      justify-content: center;
-      gap: 80px;
-      margin-top: 22px;
-    }
-
-    .org-box .level-3 {
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    /* ============================
-       DIVISI MINAT & BAKAT (RIGHT)
-       ============================ */
-
-    .minat-wrapper {
-      width: 100%;
-      margin: 60px 0;           
-     
-    }
-
-    .minat-right {
-      max-width: 750px;          /* lebar sesuai card lain */
-      margin-left: auto;         /* tarik ke kanan */
-      margin-right: 0;
-    }
-
-    /* CARD UTAMA */
-    .minat-card {
-      background: #E4C4A5;
-      padding: 40px 50px;
-      border-radius: 22px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
-      color: #000;
-      text-align: left;
-      line-height: 1.45;
-      font-size: 20px;
-    }
-
-    /* JUDUL */
-    .minat-card h3 {
-      font-size: 32px;
-      font-weight: 900;
-      color: #A11212;
-      margin-bottom: 22px;
-    }
-
-    /* SUBTITLE */
-    .minat-card h4 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-top: 26px;
-      margin-bottom: 10px;
-    }
-
-    /* TEKS & LIST */
-    .minat-card p,
-    .minat-card li {
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .minat-card ol {
-      padding-left: 22px;
-      margin-top: 4px;
-    }
-
-    .minat-card li i {
-      font-style: italic;
-    }
-
-    /* ==============================
-       DIVISI SARANA & PRASARANA (LEFT)
-       ============================== */
-
-    .sarpras-wrapper {
-      width: 100%;
-      margin: 60px 0;
-    }
-
-    .sarpras-left {
-      max-width: 750px;         /* lebar card */
-      margin-left: 0;           /* nempel kiri */
-      margin-right: auto;       /* dorong ke kiri */
-    }
-
-    .divisi-left {
-  max-width: 750px;
-  margin-left: 0;      /* nempel kiri */
-  margin-right: auto;  /* dorong ke kiri */
-}
-
-    /* CARD */
-    .sarpras-card {
-      background: #E4C4A5;
-      padding: 40px 50px;
-      border-radius: 22px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
-      color: #000;
-      text-align: left;
-      line-height: 1.45;
-      font-size: 20px;
-    }
-
-    /* JUDUL */
-    .sarpras-card h3 {
-      font-size: 32px;
-      font-weight: 900;
-      color: #A11212;
-      margin-bottom: 22px;
-    }
-
-    /* SUBTITLES */
-    .sarpras-card h4 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-top: 26px;
-      margin-bottom: 10px;
-    }
-
-    /* LIST & PARAGRAPH */
-    .sarpras-card p,
-    .sarpras-card li {
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .sarpras-card ol {
-      padding-left: 22px;
-      margin-top: 4px;
-    }
-
-    .sarpras-card li i {
-      font-style: italic;
-    }
-
-    /* ==============================
-       DIVISI KEMITRAAN (RIGHT)
-       ============================== */
-
-    .kemitraan-wrapper {
-      width: 100%;
-      margin: 60px 0;
-    }
-
-    .kemitraan-right {
-      max-width: 750px;          /* lebar konsisten */
-      margin-left: auto;         /* posisi kanan */
-      margin-right: 0;
-    }
-
-    /* CARD */
-    .kemitraan-card {
-      background: #E4C4A5;
-      padding: 40px 50px;
-      border-radius: 22px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
-      color: #000;
-      text-align: left;
-      line-height: 1.45;
-      font-size: 20px;
-    }
-
-    /* JUDUL */
-    .kemitraan-card h3 {
-      font-size: 32px;
-      font-weight: 900;
-      color: #A11212;
-      margin-bottom: 22px;
-    }
-
-    /* SUBTITLE */
-    .kemitraan-card h4 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-top: 26px;
-      margin-bottom: 10px;
-    }
-
-    /* TEKS & LIST */
-    .kemitraan-card p,
-    .kemitraan-card li {
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .kemitraan-card ol {
-      padding-left: 22px;
-      margin-top: 4px;
-    }
-
-    .kemitraan-card li i {
-      font-style: italic;
-    }
-
-    /* ==============================
-       DIVISI KOMINFO (LEFT)
-       ============================== */
-
-    .kominfo-wrapper {
-      width: 100%;
-      margin: 60px 0;
-    }
-
-    .kominfo-left {
-      max-width: 750px;          /* lebar card konsisten */
-      margin-left: 0;            /* pojok kiri */
-      margin-right: auto;
-    }
-
-    .kominfo-card {
-      background: #E4C4A5;
-      padding: 40px 50px;
-      border-radius: 22px;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
-      color: #000;
-      text-align: left;
-      line-height: 1.45;
-      font-size: 20px;
-    }
-
-    /* Judul */
-    .kominfo-card h3 {
-      font-size: 32px;
-      font-weight: 900;
-      color: #A11212;
-      margin-bottom: 22px;
-    }
-
-    /* Subjudul */
-    .kominfo-card h4 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-top: 26px;
-      margin-bottom: 10px;
-    }
-
-    /* Isi & List */
-    .kominfo-card p,
-    .kominfo-card li {
-      font-size: 20px;
-      font-weight: 500;
-      margin-bottom: 6px;
-    }
-
-    .kominfo-card ol {
-      padding-left: 22px;
-      margin-top: 4px;
-    }
-
-    .kominfo-card i {
-      font-style: italic;
-    }
-
-
-    /* ============================
-       OUR CONTENT – KEGIATAN PENGAJARAN
-       ============================ */
-
-    #our-content {
-      background: #ffffff;
-      padding: 70px 0 90px;
-    }
-
-    .oc-wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    /* PILL JUDUL – ukuran pas, tidak melebar */
-    .oc-title-pill {
-      display: block;
-      background: #E4C4A5;
-      padding: 12px 40px;     /* kecilkan padding */
-      border-radius: 999px;
-      font-size: 18px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0 auto 10px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-      max-width: 260px;       /* ⬅ BATAS supaya tidak melebar */
-    }
-
-    /* PILL MERAH – ukuran pas */
-    .oc-subtitle-pill {
-      display: block;
-      background: #B31217;
-      padding: 12px 50px;     /* kecilkan padding */
-      border-radius: 999px;
-      font-size: 18px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0 auto 30px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-      max-width: 300px;       /* ⬅ BATAS juga */
-    }
-
-    /* KOLOM 2 KOTAK */
-    .oc-columns {
-      display: flex;
-      justify-content: center;
-      gap: 70px;
-      align-items: flex-start;
-    }
-
-    /* KOTAK LUAR – ABU LEBAR */
-    .oc-pillar {
-      background: #F2F2F2;
-      border-radius: 180px;
-      padding: 22px;
-      width: 680px;              /* 🔥 LEBAR BARU */
-    }
-
-    /* KOTAK DALAM – PUTIH */
-    .oc-pillar-inner {
-      background: #ffffff;
-      border-radius: 180px 180px 50px 50px;
-      padding: 32px 22px 26px;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.20);
-      overflow: hidden;
-    }
-
-    /* LABEL MELENGKUNG */
-    .oc-arch-label {
-      margin-bottom: 14px;
-    }
-
-    .oc-arch-label svg {
-      width: 100%;
-      height: 80px;
-    }
-
-    .oc-arch-label text {
-      fill: #A11212;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-    }
-
-    /* FOTO DI DALAM KOTAK */
-    .oc-photo-list img {
-      display: block;
-      width: 100%;
-      height: 190px;         /* 🔥 foto lebih besar */
-      object-fit: cover;
-      margin-bottom: 14px;
-    }
-
-    .oc-photo-list img:last-child {
-      margin-bottom: 0;
-    }
-
-  /* =========================
-   PROGRAM KERJA SECTION
-   ========================= */
-
-#program-kerja {
-  background: #fbe6d6;
-  border-radius: 150px 150px 0 0;
-  margin-top: 40px;
-}
-
-.pk-title-pill {
-  display: inline-block;
-  background: #e4c2a3;         
-  padding: 14px 70px;          
-  border-radius: 999px;       
-  font-size: 22px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 1px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);  
-  margin: -10px auto 40px;    
-  position: relative;
-  z-index: 2;                  
-}
-
-
-/* rapikan jarak bawah wrapper */
-.pk-wrapper {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 60px 0 40px;
-  background: #fbe6d6;
-  border-top-left-radius: 90px;
-  border-top-right-radius: 90px;
-}
-
-/* JARAK ANTAR ITEM */
-.pk-item {
-  margin: 24px 0 0;      /* item kedua turun dikit dari FESTA */
-}
-
-.pk-item:first-child {
-  margin-top: 0;         /* FESTA tetap normal */
-}
-
-.pk-item:last-child {
-  margin-bottom: 16px;   /* DIKLAT bagian bawah */
-}
-
-/* judul gambar (Festival / Diklat) */
-.pk-item-title img {
-  width: 540px;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;        /* HAPUS jarak bawah */
-}
-
-
-
-/* card dasar */
-.pk-card {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 22px 26px;
-  border-radius: 22px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
-  text-align: justify;
-  font-size: 20px;
-  line-height: 1.6;
-  color: #333333;
-}
-
-/* gradient khusus FESTA (atas agak pink) */
-.pk-card-festa {
-  background: linear-gradient(
-    180deg,
-    #ffe9f3 0%,
-    #ffdbe9 45%,
-    #ffeef5 100%
-  );
-}
-
-/* gradient khusus DIKLAT (kuning-pink lembut) */
-.pk-card-diklat {
-  background: radial-gradient(circle at top,
-    #ffeebd 0%,
-    #ffe0c7 40%,
-    #ffd9de 80%
-  );
-}
-
-/* teks dalam card */
-.pk-card p {
-  margin: 0;
-}
-
-/* baris foto FESTA (3 foto) */
-.pk-photo-row {
-  margin-top: 14px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.pk-photo-row img {
-  width: 32%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-/* jarak standar semua card dari gambar */
-.pk-item .pk-card {
-  margin-top: 24px;
-}
-
-/* desktop besar: DIKLAT ditarik jauh ke atas */
-.pk-item.diklat .pk-card {
-  margin-top: -120px;
-}
-
-
-    /* =========================
-       COLLAB + CONTACT + FOOTER
-       ========================= */
-#collaboration-section {
-  padding: 100px 0 80px;
-
-  background-image:
-    linear-gradient(
-      to bottom,
-      #fbe6d6 0%,
-      #e8b3a2 25%,
-      #d87868 55%,
-      rgba(122, 0, 0, 0.40) 80%,  /* lebih transparan */
-      rgba(122, 0, 0, 0.70) 100%
-    ),
-    url("assets/img/bg-kampus.png");
-
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-}
-
-
-    /* wrapper utama */
-    .collab-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      color: #fff; /* default teks di luar card putih */
-    }
-
-    /* pill title collaborations */
-    .collab-title-pill {
-      display: inline-block;
-      background: #e4c2a3;
-      padding: 14px 70px;
-      border-radius: 999px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #ffffff;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-      margin-bottom: 40px;
-    }
-
-    /* card collab (glass) */
-    .collab-card {
-      background: rgba(255, 255, 255, 0.42);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-
-      padding: 40px 35px;
-      border-radius: 22px;
-
-      border: 1.5px solid rgba(255, 255, 255, 0.5);
-
-      box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.18),
-        0 4px 12px rgba(255, 255, 255, 0.6) inset;
-
-      text-align: left;
-      font-size: 18px;
-      line-height: 1.6;
-      color: #333333; /* isi card tetap gelap biar kebaca */
-    }
-
-    .collab-card h3 {
-      margin-top: 20px;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .collab-card ul {
-      margin: 0 0 20px 20px;
-      padding: 0;
-    }
-
-    .collab-card li {
-      margin-bottom: 6px;
-    }
-
-    /* ===== CONTACT & FOOTER ===== */
-
-    /* pill CONTACT US */
-    .cf-title-pill {
-      display: inline-block;
-      margin-top: 40px;
-      background: #e4c2a3;
-      padding: 16px 70px;
-      border-radius: 999px;
-      font-size: 26px;
-      font-weight: 700;
-      color: #ffffff;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    /* kotak IG + Email */
-    .cf-contact-card {
-      max-width: 900px;
-      margin: 18px auto 40px;
-      padding: 16px 24px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-      font-size: 20px;
-      color: #fff;
-    }
-
-    .cf-contact-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cf-icon {
-      font-size: 28px;
-    }
-
-    /* footer menu */
-.cf-footer-menus {
-  margin-top: 10px;
-  color: #fff;
-  text-align: left;
-
-  /* 🔥 baru: bloknya dipusatkan & ada padding */
-  max-width: 700px;    /* lebar area menu */
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 24px;
-}
-
-.cf-footer-menus h3 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-/* kolom menu */
-.cf-footer-cols {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
-
-  /* 🔥 ikut lebar yang sama dengan judul */
-  max-width: 100%;
-}
-
-.cf-footer-cols ul {
-  list-style: none;
-  margin: 0;
-  padding: 0 4px;      /* sedikit masuk biar nggak mepet */
-}
-
-.cf-footer-cols li {
-  margin-bottom: 6px;
-}
-
-
-    .cf-footer-cols a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 20px;
-    }
-
-    .cf-footer-cols a:hover {
-      text-decoration: underline;
-    }
-
-    /* copyright */
-    .cf-copy {
-      margin-top: 40px;
-      font-size: 18px;
-      line-height: 1.6;
-      text-align: center;
-      color: #fff;
-    }
-
-
-
-/* ============================
-   RESPONSIVE
-   ============================ */
-
-/* ≤ 992px — Tablet / landscape mobile besar */
-@media (max-width: 992px) {
-
-  /* Hero tidak dipaksa 1 layar */
-  .hero {
-    min-height: auto;
+ <style>
+  /* RESET */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
+  body {
+    font-family: "Montserrat", sans-serif;
+    background: #ffffff;
+    color: #fff;
+  }
+
+  /* ================== HERO FULL SCREEN ================== */
+  .hero {
+    position: relative;
+    min-height: 100vh;       /* penuh 1 layar */
+    width: 100%;
+    overflow: hidden;
+    color: #fff;
+  }
+
+  /* BACKGROUND FOTO UTAMA (FO TO KAMPUS) */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url("assets/img/bg-kampus.png") center center / cover no-repeat;
+    filter: brightness(0.6);
+    z-index: 0;
+  }
+
+  /* LAYER MERAH DI ATAS FOTO */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(186, 23, 29, 0.95) 0%,
+      rgba(174, 26, 31, 0.75) 35%,
+      rgba(179, 18, 23, 0.25) 70%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    z-index: 1;
+  }
+
+  /* ================== NAVBAR ================== */
+  .hero-nav {
+    position: relative;
+    z-index: 10;
+    background: #770000;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.4);
+    width: 100%;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo-box {
+    width: 90px;
+    height: 52px;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-logo-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 32px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #ffe1a4;
+    transition: width .25s;
+  }
+
+  .nav-menu a:hover::after {
+    width: 100%;
+  }
+
+  /* tombol bar (hamburger) – default disembunyikan, muncul di mobile */
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  /* ================== ISI HERO ================== */
   .hero-inner {
-    padding: 24px 16px 24px;
+    position: relative;
+    z-index: 1;
+    padding: 40px 32px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* PILL PUTIH berisi 4 logo */
+  .hero-badge {
+    margin-top: 55px;
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 12px 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.5);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;             /* jarak antar logo */
+  }
+
+  .hero-badge img {
+    height: 40px;          /* semua logo sama tinggi */
+    width: auto;
+    object-fit: contain;
+  }
+
+  .hero-title-wrapper {
+    position: relative;
+    margin-top: -90px;
   }
 
   .hero-title-main {
-    max-width: 85vw;
+    display: block;
+    max-width: 780px;
+    height: auto;
+    filter: drop-shadow(0 16px 24px rgba(0,0,0,.6));
   }
 
-  .hero-badge {
-    flex-wrap: wrap;
-    padding: 10px 24px;
-    gap: 16px;
+  .hero-plane-left,
+  .hero-plane-right {
+    position: absolute;
+    top: 16%;
+    width: 140px;
+    height: auto;
   }
 
-  /* Posisi wrapper divisi tetap */
-  .divisi-wrapper,
-  .minat-wrapper,
-  .sarpras-wrapper,
-  .kemitraan-wrapper,
-  .kominfo-wrapper {
-    padding: 0;
+  .hero-plane-left { left: -80px; }
+  .hero-plane-right { right: -80px; }
+
+  .hero-cta {
+    margin-top: 130px;
+    background: #f2c79a;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 20px 80px;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 14px 30px rgba(0,0,0,.35);
+  }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(0,0,0,.4);
   }
 
-  .divisi-right,
-  .minat-right,
-  .kemitraan-right {
-    width: 88%;
-    max-width: none;
+  /* ---- CONTENT BOX (Penjelasan / Visi / Misi) ---- */
+
+  .info-box {
+    background: #D9D9D9;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 28px 30px 32px 32px;
+    border-radius: 18px;
+    position: relative;
+    color: #000;
+    line-height: 1.55;
+    font-size: 18px;       /* DESKTOP: isi penjelasan 18px */
+  }
+
+  /* garis tebal di sisi kiri */
+  .info-box::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 12px;
+    background: #BFBFBF;
+    border-radius: 8px;
+  }
+
+  /* judul */
+  .info-box h3 {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* subjudul VISI / MISI */
+  .info-box h4 {
+    margin-top: 16px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* paragraf */
+  .info-box p {
+    color: #000;
+    margin-bottom: 12px;
+  }
+
+  /* list */
+  .info-box ol {
+    padding-left: 20px;
+    margin-top: 8px;
+  }
+
+  .info-box li {
+    margin-bottom: 6px;
+  }
+
+  /* ---- DIVISI KAMPUS ---- */
+  .divisi-wrapper {
+    width: 100%;
+    margin: 50px 0 90px;
+  }
+
+  /* card tetap di kanan */
+  .divisi-right {
+    max-width: 750px;
     margin-left: auto;
     margin-right: 0;
   }
 
-  .divisi-left,
-  .sarpras-left,
-  .kominfo-left {
-    width: 88%;
-    max-width: none;
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-  .org-box {
-    padding: 24px 18px 28px;
-  }
-
-  .oc-wrapper {
-    padding: 0 16px;
-  }
-
-  .oc-columns {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .oc-pillar {
+  /* WRAPPER PILL – bikin pill di tengah halaman */
+  .divisi-title-wrapper {
     width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    border-radius: 40px;
+    text-align: center;
+    margin-bottom: 25px;
   }
 
-  .oc-pillar-inner {
-    border-radius: 40px 40px 24px 24px;
+  /* pill-nya sendiri */
+  .divisi-title-pill {
+    display: inline-block;      /* boleh inline-block sekarang */
+    background: #E4C4A5;
+    padding: 12px 42px;
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.15);
+    letter-spacing: 1px;
+    margin: 0;                  /* nggak perlu auto lagi */
+    text-align: center;
   }
 
-  .pk-wrapper {
-    padding: 40px 16px 30px;
+  /* ========= CARD UTAMA ========= */
+  .divisi-card {
+    background: #E4C4A5;
+    padding: 40px 50px;             /* lebih lega */
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+    color: #000;
+    text-align: left;
+    max-width: 780px;               /* biar sama seperti gambar */
+    line-height: 1.45;              /* lebih rapat = lebih rapi */
+    font-size: 18px;                /* DESKTOP: isi card 18px */
   }
 
-  .pk-card {
-    padding: 20px 18px;
+  /* JUDUL */
+  .divisi-card h3 {
+    font-size: 32px;                /* besar seperti desain */
+    font-weight: 900;
+    color: #A11212;
+    margin-bottom: 22px;
   }
 
-  /* ===== SKALA FONT UMUM (kecil & seragam) ===== */
-
-  /* isi paragraf / list */
-  .info-box,
-  .divisi-card,
-  .minat-card,
-  .sarpras-card,
-  .kemitraan-card,
-  .kominfo-card,
-  .pk-card,
-  .collab-card {
-    font-size: 16px !important;
-    line-height: 1.45;
+  /* SUBJUDUL (Tupoksi, Proker) */
+  .divisi-card h4 {
+    font-size: 22px;                /* lebih besar */
+    font-weight: 800;
+    margin-top: 28px;               /* jarak pas */
+    margin-bottom: 10px;
   }
 
-  /* judul besar */
-  .info-box h3,
-  .divisi-card h3,
-  .minat-card h3,
-  .sarpras-card h3,
-  .kemitraan-card h3,
-  .kominfo-card h3,
-  .collab-card h3 {
-    font-size: 22px !important;
+  /* PARAGRAF & LIST */
+  .divisi-card p,
+  .divisi-card li {
+    font-weight: 500;               /* lebih tegas */
+    margin-bottom: 6px;
   }
 
-  /* subjudul (VISI / MISI / Tupoksi / Proker) */
-  .info-box h4,
-  .divisi-card h4,
-  .minat-card h4,
-  .sarpras-card h4,
-  .kemitraan-card h4,
-  .kominfo-card h4 {
-    font-size: 18px !important;
+  /* NOMOR LIST */
+  .divisi-card ol {
+    padding-left: 22px;             /* biar rapi */
+    margin-top: 4px;
   }
 
-  /* tombol hero lebih kecil */
-  .hero-cta {
-    font-size: 18px !important;
-    margin-top: 20px !important;
+  /* LIST ITALIC */
+  .divisi-card li i {
+    font-style: italic;
+    font-weight: 500;
   }
 
-  .pk-item.diklat .pk-card {
-    margin-top: -150px;
-  }
-}
-
-
-
-/* ≤ 768px — Mobile sedang */
-@media (max-width: 768px) {
-
-  .hero-nav {
-    padding: 0 16px;
-  }
-
-  .nav-logo-box {
-    width: 72px;
-    height: 44px;
+  /* ========= BOX STRUKTUR (SEJAJAR DENGAN CARD) ========= */
+  .org-box {
+    background: #F1F1F1;
+    width: 100%;               /* ⬅ ikut lebar card */
+    margin-top: 22px;          /* jarak dari card */
+    padding: 40px 30px 45px;
+    border-radius: 22px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    text-align: center;
+    color: #000;
+    font-size: 18px;           /* biar seimbang */
   }
 
-  /* logo & title sedikit naik */
-  .hero-title-wrapper {
-    margin-top: -25px !important;
+  .org-box .level-1 {
+    font-size: 22px;
+    font-weight: 800;
   }
 
-  .hero-title-main {
-    transform: translateY(-15px) !important;
-  }
-
-  /* tombol dekat dengan konten di bawahnya */
-  .hero-cta {
-    font-size: 16px !important;
-    width: 85%;
-    margin-top: 12px !important;
-    margin-bottom: 0 !important;
-  }
-
-  .hero-inner {
-    padding-bottom: 20px !important;
-  }
-
-  /* MENU MOBILE */
-  .nav-menu {
-    display: none;
-    position: absolute;
-    top: 72px;
-    left: 0;
-    right: 0;
-    background: #770000;
-    flex-direction: column;
-    gap: 16px;
-    padding: 16px 24px 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    z-index: 999;
-  }
-
-  .nav-menu.show {
-    display: flex;
-  }
-
-  .nav-menu a {
-    font-size: 16px;
-  }
-
-  .nav-toggle {
-    display: block;
-  }
-
-  .hero-badge img {
-    height: 32px;
+  .org-box .level-2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 10px;
   }
 
   .org-box .level-3-container {
-    flex-direction: column;
-    gap: 8px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 22px;
   }
 
-  .cf-contact-card {
-    padding: 14px 16px;
-    gap: 14px;
+  .org-box .level-3 {
     font-size: 18px;
+    font-weight: 700;
   }
 
-  .cf-footer-menus {
+  /* ============================
+      DIVISI MINAT & BAKAT (RIGHT)
+      ============================ */
+
+  .minat-wrapper {
+    width: 100%;
+    margin: 60px 0;           
+  }
+
+  .minat-right {
+    max-width: 750px;          /* lebar sesuai card lain */
+    margin-left: auto;         /* tarik ke kanan */
+    margin-right: 0;
+  }
+
+  /* CARD UTAMA */
+  .minat-card {
+    background: #E4C4A5;
+    padding: 40px 50px;
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+    color: #000;
+    text-align: left;
+    line-height: 1.45;
+    font-size: 18px;           /* DESKTOP: isi card 18px */
+  }
+
+  /* JUDUL */
+  .minat-card h3 {
+    font-size: 32px;
+    font-weight: 900;
+    color: #A11212;
+    margin-bottom: 22px;
+  }
+
+  /* SUBTITLE */
+  .minat-card h4 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 26px;
+    margin-bottom: 10px;
+  }
+
+  /* TEKS & LIST */
+  .minat-card p,
+  .minat-card li {
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .minat-card ol {
+    padding-left: 22px;
+    margin-top: 4px;
+  }
+
+  .minat-card li i {
+    font-style: italic;
+  }
+
+  /* ==============================
+      DIVISI SARANA & PRASARANA (LEFT)
+      ============================== */
+
+  .sarpras-wrapper {
+    width: 100%;
+    margin: 60px 0;
+  }
+
+  .sarpras-left {
+    max-width: 750px;         /* lebar card */
+    margin-left: 0;           /* nempel kiri */
+    margin-right: auto;       /* dorong ke kiri */
+  }
+
+  .divisi-left {
+    max-width: 750px;
+    margin-left: 0;      /* nempel kiri */
+    margin-right: auto;  /* dorong ke kiri */
+  }
+
+  /* CARD */
+  .sarpras-card {
+    background: #E4C4A5;
+    padding: 40px 50px;
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+    color: #000;
+    text-align: left;
+    line-height: 1.45;
+    font-size: 18px;          /* DESKTOP: isi card 18px */
+  }
+
+  /* JUDUL */
+  .sarpras-card h3 {
+    font-size: 32px;
+    font-weight: 900;
+    color: #A11212;
+    margin-bottom: 22px;
+  }
+
+  /* SUBTITLES */
+  .sarpras-card h4 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 26px;
+    margin-bottom: 10px;
+  }
+
+  /* LIST & PARAGRAPH */
+  .sarpras-card p,
+  .sarpras-card li {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .sarpras-card ol {
+    padding-left: 22px;
+    margin-top: 4px;
+  }
+
+  .sarpras-card li i {
+    font-style: italic;
+  }
+
+  /* ==============================
+      DIVISI KEMITRAAN (RIGHT)
+      ============================== */
+
+  .kemitraan-wrapper {
+    width: 100%;
+    margin: 60px 0;
+  }
+
+  .kemitraan-right {
+    max-width: 750px;          /* lebar konsisten */
+    margin-left: auto;         /* posisi kanan */
+    margin-right: 0;
+  }
+
+  /* CARD */
+  .kemitraan-card {
+    background: #E4C4A5;
+    padding: 40px 50px;
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+    color: #000;
+    text-align: left;
+    line-height: 1.45;
+    font-size: 18px;          /* DESKTOP: isi card 18px */
+  }
+
+  /* JUDUL */
+  .kemitraan-card h3 {
+    font-size: 32px;
+    font-weight: 900;
+    color: #A11212;
+    margin-bottom: 22px;
+  }
+
+  /* SUBTITLE */
+  .kemitraan-card h4 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 26px;
+    margin-bottom: 10px;
+  }
+
+  /* TEKS & LIST */
+  .kemitraan-card p,
+  .kemitraan-card li {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .kemitraan-card ol {
+    padding-left: 22px;
+    margin-top: 4px;
+  }
+
+  .kemitraan-card li i {
+    font-style: italic;
+  }
+
+  /* ==============================
+      DIVISI KOMINFO (LEFT)
+      ============================== */
+
+  .kominfo-wrapper {
+    width: 100%;
+    margin: 60px 0;
+  }
+
+  .kominfo-left {
+    max-width: 750px;          /* lebar card konsisten */
+    margin-left: 0;            /* pojok kiri */
+    margin-right: auto;
+  }
+
+  .kominfo-card {
+    background: #E4C4A5;
+    padding: 40px 50px;
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+    color: #000;
+    text-align: left;
+    line-height: 1.45;
+    font-size: 18px;          /* DESKTOP: isi card 18px */
+  }
+
+  /* Judul */
+  .kominfo-card h3 {
+    font-size: 32px;
+    font-weight: 900;
+    color: #A11212;
+    margin-bottom: 22px;
+  }
+
+  /* Subjudul */
+  .kominfo-card h4 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 26px;
+    margin-bottom: 10px;
+  }
+
+  /* Isi & List */
+  .kominfo-card p,
+  .kominfo-card li {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .kominfo-card ol {
+    padding-left: 22px;
+    margin-top: 4px;
+  }
+
+  .kominfo-card i {
+    font-style: italic;
+  }
+
+
+  /* ============================
+      OUR CONTENT – KEGIATAN PENGAJARAN
+      ============================ */
+
+  #our-content {
+    background: #ffffff;
+    padding: 70px 0 90px;
+  }
+
+  .oc-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* PILL JUDUL – ukuran pas, tidak melebar */
+  .oc-title-pill {
+    display: block;
+    background: #E4C4A5;
+    padding: 12px 40px;     /* kecilkan padding */
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 auto 10px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    max-width: 260px;       /* ⬅ BATAS supaya tidak melebar */
+  }
+
+  /* PILL MERAH – ukuran pas */
+  .oc-subtitle-pill {
+    display: block;
+    background: #B31217;
+    padding: 12px 50px;     /* kecilkan padding */
+    border-radius: 999px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 auto 30px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    max-width: 300px;       /* ⬅ BATAS juga */
+  }
+
+  /* KOLOM 2 KOTAK */
+  .oc-columns {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    align-items: flex-start;
+  }
+
+  /* KOTAK LUAR – ABU LEBAR */
+  .oc-pillar {
+    background: #F2F2F2;
+    border-radius: 180px;
+    padding: 22px;
+    width: 680px;              /* 🔥 LEBAR BARU */
+  }
+
+  /* KOTAK DALAM – PUTIH */
+  .oc-pillar-inner {
+    background: #ffffff;
+    border-radius: 180px 180px 50px 50px;
+    padding: 32px 22px 26px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.20);
+    overflow: hidden;
+  }
+
+  /* LABEL MELENGKUNG */
+  .oc-arch-label {
+    margin-bottom: 14px;
+  }
+
+  .oc-arch-label svg {
+    width: 100%;
+    height: 80px;
+  }
+
+  .oc-arch-label text {
+    fill: #A11212;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* FOTO DI DALAM KOTAK */
+  .oc-photo-list img {
+    display: block;
+    width: 100%;
+    height: 190px;         /* 🔥 foto lebih besar */
+    object-fit: cover;
+    margin-bottom: 14px;
+  }
+
+  .oc-photo-list img:last-child {
+    margin-bottom: 0;
+  }
+
+  /* =========================
+    PROGRAM KERJA SECTION
+    ========================= */
+
+  #program-kerja {
+    background: #fbe6d6;
+    border-radius: 150px 150px 0 0;
+    margin-top: 40px;
+  }
+
+  .pk-title-pill {
+    display: inline-block;
+    background: #e4c2a3;         
+    padding: 14px 70px;          
+    border-radius: 999px;       
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);  
+    margin: -10px auto 40px;    
+    position: relative;
+    z-index: 2;                  
+  }
+
+  /* rapikan jarak bawah wrapper */
+  .pk-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 60px 0 40px;
+    background: #fbe6d6;
+    border-top-left-radius: 90px;
+    border-top-right-radius: 90px;
+  }
+
+  /* JARAK ANTAR ITEM */
+  .pk-item {
+    margin: 24px 0 0;      /* item kedua turun dikit dari FESTA */
+  }
+
+  .pk-item:first-child {
+    margin-top: 0;         /* FESTA tetap normal */
+  }
+
+  .pk-item:last-child {
+    margin-bottom: 16px;   /* DIKLAT bagian bawah */
+  }
+
+  /* judul gambar (Festival / Diklat) */
+  .pk-item-title img {
+    width: 540px;
     max-width: 100%;
-    margin: 24px auto 0;
-    padding: 0 24px 10px;
+    height: auto;
+    display: block;
+    margin: 0 auto;        /* HAPUS jarak bawah */
   }
 
-  .cf-footer-cols {
-    flex-direction: column;
-    gap: 8px;
+  /* card dasar */
+  .pk-card {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 22px 26px;
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    text-align: justify;
+    font-size: 18px;        /* DESKTOP: isi card 18px */
+    line-height: 1.6;
+    color: #333333;
   }
 
-  .cf-footer-cols a {
-    font-size: 18px;
+  /* gradient khusus FESTA (atas agak pink) */
+  .pk-card-festa {
+    background: linear-gradient(
+      180deg,
+      #ffe9f3 0%,
+      #ffdbe9 45%,
+      #ffeef5 100%
+    );
   }
 
-  /* background collab versi mobile */
+  /* gradient khusus DIKLAT (kuning-pink lembut) */
+  .pk-card-diklat {
+    background: radial-gradient(circle at top,
+      #ffeebd 0%,
+      #ffe0c7 40%,
+      #ffd9de 80%
+    );
+  }
+
+  /* teks dalam card */
+  .pk-card p {
+    margin: 0;
+  }
+
+  /* baris foto FESTA (3 foto) */
+  .pk-photo-row {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .pk-photo-row img {
+    width: 32%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  /* jarak standar semua card dari gambar */
+  .pk-item .pk-card {
+    margin-top: 24px;
+  }
+
+  /* desktop besar: DIKLAT ditarik jauh ke atas */
+  .pk-item.diklat .pk-card {
+    margin-top: -120px;
+  }
+
+
+  /* =========================
+      COLLAB + CONTACT + FOOTER
+      ========================= */
   #collaboration-section {
+    padding: 100px 0 80px;
+
     background-image:
       linear-gradient(
         to bottom,
-        rgba(251, 230, 214, 0.85) 0%,
-        rgba(232, 179, 162, 0.80) 25%,
-        rgba(216, 120, 104, 0.75) 55%,
-        rgba(122, 0, 0, 0.65) 80%,
-        rgba(122, 0, 0, 0.80) 100%
+        #fbe6d6 0%,
+        #e8b3a2 25%,
+        #d87868 55%,
+        rgba(122, 0, 0, 0.40) 80%,  /* lebih transparan */
+        rgba(122, 0, 0, 0.70) 100%
       ),
       url("assets/img/bg-kampus.png");
+
     background-size: cover;
-    background-position: center bottom;
+    background-position: center top;
     background-repeat: no-repeat;
   }
 
-  /* skala font lebih kecil lagi */
-  .info-box,
-  .divisi-card,
-  .minat-card,
-  .sarpras-card,
-  .kemitraan-card,
-  .kominfo-card,
-  .pk-card,
+  /* wrapper utama */
+  .collab-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff; /* default teks di luar card putih */
+  }
+
+  /* pill title collaborations */
+  .collab-title-pill {
+    display: inline-block;
+    background: #e4c2a3;
+    padding: 14px 70px;
+    border-radius: 999px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    margin-bottom: 40px;
+  }
+
+  /* card collab (glass) */
   .collab-card {
-    font-size: 15px !important;
+    background: rgba(255, 255, 255, 0.42);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    padding: 40px 35px;
+    border-radius: 22px;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.18),
+      0 4px 12px rgba(255, 255, 255, 0.6) inset;
+
+    text-align: left;
+    font-size: 18px;         /* DESKTOP: isi card 18px */
+    line-height: 1.6;
+    color: #333333; /* isi card tetap gelap biar kebaca */
   }
 
-  .info-box h3,
-  .divisi-card h3,
-  .minat-card h3,
-  .sarpras-card h3,
-  .kemitraan-card h3,
-  .kominfo-card h3 {
-    font-size: 20px !important;
+  .collab-card h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 700;
   }
 
-  .info-box h4,
-  .divisi-card h4,
-  .minat-card h4,
-  .sarpras-card h4,
-  .kemitraan-card h4,
-  .kominfo-card h4 {
-    font-size: 16px !important;
+  .collab-card ul {
+    margin: 0 0 20px 20px;
+    padding: 0;
   }
 
-  .pk-item.diklat .pk-card {
-    margin-top: -150px;
-  }
-  
-}
-
-
-
-/* ≤ 480px — Mobile kecil */
-@media (max-width: 480px) {
-
-  .hero-cta {
-    font-size: 15px !important;
-    margin-top: 14px !important;
-    margin-bottom: 0 !important;
+  .collab-card li {
+    margin-bottom: 6px;
   }
 
-  /* isi card & penjelasan paling kecil */
-  .info-box,
-  .divisi-card,
-  .minat-card,
-  .sarpras-card,
-  .kemitraan-card,
-  .kominfo-card,
-  .pk-card,
-  .collab-card {
-    font-size: 14px !important;
-    padding: 16px !important;
-  }
+  /* ===== CONTACT & FOOTER ===== */
 
-  .info-box h3,
-  .divisi-card h3,
-  .minat-card h3,
-  .sarpras-card h3,
-  .kemitraan-card h3,
-  .kominfo-card h3 {
-    font-size: 18px !important;
-  }
-
-  .info-box h4,
-  .divisi-card h4,
-  .minat-card h4,
-  .sarpras-card h4,
-  .kemitraan-card h4,
-  .kominfo-card h4 {
-    font-size: 15px !important;
-  }
-
+  /* pill CONTACT US */
   .cf-title-pill {
-    padding: 12px 40px;
-    font-size: 22px;
+    display: inline-block;
+    margin-top: 40px;
+    background: #e4c2a3;
+    padding: 16px 70px;
+    border-radius: 999px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
   }
 
-  .pk-item.diklat .pk-card {
-    margin-top: -150px;
+  /* kotak IG + Email */
+  .cf-contact-card {
+    max-width: 900px;
+    margin: 18px auto 40px;
+    padding: 16px 24px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    font-size: 18px;   /* DESKTOP: 18px */
+    color: #fff;
   }
+
+  .cf-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cf-icon {
+    font-size: 28px;
+  }
+
+  /* footer menu */
+  .cf-footer-menus {
+    margin-top: 10px;
+    color: #fff;
+    text-align: left;
+
+    /* 🔥 baru: bloknya dipusatkan & ada padding */
+    max-width: 700px;    /* lebar area menu */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 24px;
+  }
+
+  .cf-footer-menus h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  /* kolom menu */
+  .cf-footer-cols {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+
+    /* 🔥 ikut lebar yang sama dengan judul */
+    max-width: 100%;
+  }
+
+  .cf-footer-cols ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 4px;      /* sedikit masuk biar nggak mepet */
+  }
+
+  .cf-footer-cols li {
+    margin-bottom: 6px;
+  }
+
+  .cf-footer-cols a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;  /* DESKTOP: 18px */
+  }
+
+  .cf-footer-cols a:hover {
+    text-decoration: underline;
+  }
+
+  /* copyright */
+  .cf-copy {
+    margin-top: 40px;
+    font-size: 18px;   /* DESKTOP: 18px */
+    line-height: 1.6;
+    text-align: center;
+    color: #fff;
+  }
+
+
+
+  /* ============================
+    RESPONSIVE
+    ============================ */
+
+  /* ≤ 992px — Tablet / landscape mobile besar */
+  @media (max-width: 992px) {
+
+    /* Hero tidak dipaksa 1 layar */
+    .hero {
+      min-height: auto;
+    }
+
+    .hero-inner {
+      padding: 24px 16px 24px;
+    }
+
+    .hero-title-main {
+      max-width: 85vw;
+    }
+
+    .hero-badge {
+      flex-wrap: wrap;
+      padding: 10px 24px;
+      gap: 16px;
+    }
+
+    /* Posisi wrapper divisi tetap */
+    .divisi-wrapper,
+    .minat-wrapper,
+    .sarpras-wrapper,
+    .kemitraan-wrapper,
+    .kominfo-wrapper {
+      padding: 0;
+    }
+
+    .divisi-right,
+    .minat-right,
+    .kemitraan-right {
+      width: 88%;
+      max-width: none;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .divisi-left,
+    .sarpras-left,
+    .kominfo-left {
+      width: 88%;
+      max-width: none;
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .org-box {
+      padding: 24px 18px 28px;
+      font-size: 14px;     /* RESPONSIVE: 14px */
+    }
+
+    .oc-wrapper {
+      padding: 0 16px;
+    }
+
+    .oc-columns {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .oc-pillar {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      border-radius: 40px;
+    }
+
+    .oc-pillar-inner {
+      border-radius: 40px 40px 24px 24px;
+    }
+
+    .pk-wrapper {
+      padding: 40px 16px 30px;
+    }
+
+    .pk-card {
+      padding: 20px 18px;
+    }
+
+    /* ===== SKALA FONT UMUM (kecil & seragam) ===== */
+
+    /* isi paragraf / list */
+    .info-box,
+    .divisi-card,
+    .minat-card,
+    .sarpras-card,
+    .kemitraan-card,
+    .kominfo-card,
+    .pk-card,
+    .collab-card {
+      font-size: 14px !important;  /* RESPONSIVE: 14px */
+      line-height: 1.45;
+    }
+
+    /* judul besar */
+    .info-box h3,
+    .divisi-card h3,
+    .minat-card h3,
+    .sarpras-card h3,
+    .kemitraan-card h3,
+    .kominfo-card h3,
+    .collab-card h3 {
+      font-size: 16px !important;
+    }
+
+    /* subjudul (VISI / MISI / Tupoksi / Proker) */
+    .info-box h4,
+    .divisi-card h4,
+    .minat-card h4,
+    .sarpras-card h4,
+    .kemitraan-card h4,
+    .kominfo-card h4 {
+      font-size: 16px !important;
+    }
+
+    /* tombol hero lebih kecil */
+    .hero-cta {
+      font-size: 18px !important;
+      margin-top: 20px !important;
+    }
+
+    .pk-item.diklat .pk-card {
+      margin-top: -150px;
+    }
+
+    .cf-contact-card {
+      font-size: 14px !important; /* RESPONSIVE 14 */
+    }
+
+    .cf-footer-cols a {
+      font-size: 14px !important; /* RESPONSIVE 14 */
+    }
+
+    .cf-copy {
+      font-size: 14px !important; /* RESPONSIVE 14 */
+    }
+  }
+
+
+
+  /* ≤ 768px — Mobile sedang */
+  @media (max-width: 768px) {
+
+    .hero-nav {
+      padding: 0 16px;
+    }
+
+    .nav-logo-box {
+      width: 72px;
+      height: 44px;
+    }
+
+    /* logo & title sedikit naik */
+    .hero-title-wrapper {
+      margin-top: -25px !important;
+    }
+
+    .hero-title-main {
+      transform: translateY(-15px) !important;
+    }
+
+    /* tombol dekat dengan konten di bawahnya */
+    .hero-cta {
+      font-size: 16px !important;
+      width: 85%;
+      margin-top: 12px !important;
+      margin-bottom: 0 !important;
+    }
+
+    .hero-inner {
+      padding-bottom: 20px !important;
+    }
+
+    /* MENU MOBILE */
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: #770000;
+      flex-direction: column;
+      gap: 16px;
+      padding: 16px 24px 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+
+    .nav-menu.show {
+      display: flex;
+    }
+
+    .nav-menu a {
+      font-size: 16px;
+    }
+
+    .nav-toggle {
+      display: block;
+    }
+
+    .hero-badge img {
+      height: 32px;
+    }
+
+    .org-box .level-3-container {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cf-contact-card {
+      padding: 14px 16px;
+      gap: 14px;
+      font-size: 14px; /* RESPONSIVE 14 */
+    }
+
+    .cf-footer-menus {
+      max-width: 100%;
+      margin: 24px auto 0;
+      padding: 0 24px 10px;
+    }
+
+    .cf-footer-cols {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cf-footer-cols a {
+      font-size: 14px; /* RESPONSIVE 14 */
+    }
+
+    /* background collab versi mobile */
+    #collaboration-section {
+      background-image:
+        linear-gradient(
+          to bottom,
+          rgba(251, 230, 214, 0.85) 0%,
+          rgba(232, 179, 162, 0.80) 25%,
+          rgba(216, 120, 104, 0.75) 55%,
+          rgba(122, 0, 0, 0.65) 80%,
+          rgba(122, 0, 0, 0.80) 100%
+        ),
+        url("assets/img/bg-kampus.png");
+      background-size: cover;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+
+    /* skala font lebih kecil lagi */
+    .info-box,
+    .divisi-card,
+    .minat-card,
+    .sarpras-card,
+    .kemitraan-card,
+    .kominfo-card,
+    .pk-card,
+    .collab-card {
+      font-size: 14px !important;  /* tetap 14 di semua responsive */
+    }
+
+    .info-box h3,
+    .divisi-card h3,
+    .minat-card h3,
+    .sarpras-card h3,
+    .kemitraan-card h3,
+    .kominfo-card h3 {
+      font-size: 20px !important;
+    }
+
+    .info-box h4,
+    .divisi-card h4,
+    .minat-card h4,
+    .sarpras-card h4,
+    .kemitraan-card h4,
+    .kominfo-card h4 {
+      font-size: 16px !important;
+    }
+
+    .pk-item.diklat .pk-card {
+      margin-top: -150px;
+    }
+  }
+
+
+
+  /* ≤ 480px — Mobile kecil */
+  @media (max-width: 480px) {
+
+    .hero-cta {
+      font-size: 12px !important;
+      margin-top: 14px !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* isi card & penjelasan */
+    .info-box,
+    .divisi-card,
+    .minat-card,
+    .sarpras-card,
+    .kemitraan-card,
+    .kominfo-card,
+    .pk-card,
+    .collab-card {
+      font-size: 14px !important;   /* RESPONSIVE 14 */
+      padding: 16px !important;
+    }
+
+    .info-box h3,
+    .divisi-card h3,
+    .minat-card h3,
+    .sarpras-card h3,
+    .kemitraan-card h3,
+    .kominfo-card h3 {
+      font-size: 14px !important;
+    }
+
+    .info-box h4,
+    .divisi-card h4,
+    .minat-card h4,
+    .sarpras-card h4,
+    .kemitraan-card h4,
+    .kominfo-card h4 {
+      font-size: 14px !important;
+    }
+
+    .cf-title-pill {
+      padding: 12px 40px;
+      font-size: 14px;   /* RESPONSIVE 14 */
+    }
+
+    .cf-contact-card {
+      font-size: 14px !important;
+    }
+
+    .cf-footer-cols a {
+      font-size: 14px !important;
+    }
+
+    .cf-copy {
+      font-size: 14px !important;
+    }
+
+    .pk-item.diklat .pk-card {
+      margin-top: -150px;
+    }
+  }
+
+  /* --- Samakan ukuran teks semua card divisi di desktop --- */
+.minat-card,
+.sarpras-card,
+.kemitraan-card,
+.kominfo-card {
+  font-size: 18px;
 }
 
+/* Hilangkan ukuran khusus 20px di Sarpras, Kemitraan, Kominfo */
+.sarpras-card p,
+.sarpras-card li,
+.kemitraan-card p,
+.kemitraan-card li,
+.kominfo-card p,
+.kominfo-card li {
+  font-size: inherit;
+}
 
-  </style>
+</style>
+
 </head>
 <body>
 
@@ -1402,7 +1436,6 @@
     <div class="hero-badge">
       <img src="assets/img/logounj.png" alt="Logo 1">
       <img src="assets/img/logobem.png" alt="Logo 2">
-      <img src="assets/img/logobem2.png" alt="Logo 3">
       <img src="assets/img/logodesa.jpg" alt="Logo 4">
     </div>
 
